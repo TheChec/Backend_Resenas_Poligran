@@ -4,6 +4,8 @@ const ProductCtrl = require("../controllers/product.controller");  // Correcta s
 
 router.post("/",ProductCtrl.PostProduct)
 router.get("/",ProductCtrl.GetProduct)
+router.delete("/:id",ProductCtrl.DelProduct)
+router.put("/:id",ProductCtrl.UpdateProduct)
 
 module.exports = router
 

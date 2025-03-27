@@ -50,4 +50,49 @@ ProductCtrl.GetProduct = async (req, res, next) => {
     }
 }
 
+ProductCtrl.DelProduct = async (req, res, next) => {
+    try {
+        const _id = req.params.id
+        const deleteProducts = await products.findByIdAndDelete(_id)
+        res.status(200).send(
+            {
+                status: 200,
+                message: "Se ha elimado el producto con exitos",
+                data: deleteProducts
+            }
+        )
+    } catch (error) {
+        res.status(500).send(
+            {
+                status: 500,
+                message: "Error al eliminar el producto",
+                error: error.message
+            }
+        )
+    }
+}
+
+ProductCtrl.UpdateProduct = async (req, res, next) => {
+    try {
+        const Product = req.body
+        const _id = req.params.id
+        const UpdateProduct = await products.findByIdAndUpdate(_id,Product, {new: true})
+        res.status(200).send(
+            {
+                status: 200,
+                message: "Se a actualizado el producto",
+                data: UpdateProduct
+            }
+        )
+    } catch (error) {
+        res.status(500).send(
+            {
+                status: 500,
+                message: "Error al actualizar el producto",
+                error: error.message
+            }
+        )
+    }
+}
+
 module.exports = ProductCtrl
