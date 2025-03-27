@@ -2,11 +2,6 @@ const mongoose = require("mongoose")
 
 const StorageSchema = new mongoose.Schema(
     {
-        _id: {
-            type: mongoose.Schema.Types.ObjectId,
-            unique: true,
-            trim: true
-        },
         name: {
             type: String,
             required: true,
@@ -43,4 +38,4 @@ const StorageSchema = new mongoose.Schema(
     }
 )
 
-module.exports = mongoose.models.users || mongoose.models("users", StorageSchema)
+module.exports = mongoose.models.User || mongoose.model("User", StorageSchema)

@@ -4,7 +4,7 @@ const cors = require("cors")
 const router = require("../routes")
 const app = express()
 const conection_mongoDB = require("../database/config")
-const { boomErrorHandler, errorHandler, logErrors } = require('../middlewares/BoomErrors')
+const { boomErrorHandler, errorHandler, logErrors } = require('../utils/BoomErrors')
 const PORT = process.env.PORT || 3000
 
 app.use(express.json())

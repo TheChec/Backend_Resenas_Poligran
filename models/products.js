@@ -2,11 +2,6 @@ const mongoose = require("mongoose")
 
 const StorageSchema = new mongoose.Schema(
     {
-        _id: {
-            type: String,
-            unique: true,
-            trim: true
-        },
         name: {
             type: String,
             required: true,
@@ -27,22 +22,18 @@ const StorageSchema = new mongoose.Schema(
         },
         rating: {
             type: Number,
-            required: true
         },
         people_who_rate: {
             type: Number,
-            required: true
         },
         reviews: [
             {
                 user: {
                     type: String,
                     ref: "users",
-                    required: true
                 },
                 comment: {
                     type: String,
-                    required: true
                 },
                 createdAt: {
                     type: Date,
