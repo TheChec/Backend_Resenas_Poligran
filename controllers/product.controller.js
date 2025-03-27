@@ -1,4 +1,4 @@
-const products = require("../models/products")
+const products = require("../models/products");  // Correcta si 'products.js' está en 'models'
 const boom = require("@hapi/boom")
 const ProductCtrl = {}
 
@@ -9,7 +9,7 @@ const ProductCtrl = {}
  * @param {import("express").NextFunction} next
  */
 
-ProductCtrl.PostUsers = async (req, res, next) => {
+ProductCtrl.PostProduct = async (req, res, next) => {
     try {
         const newProduct = req.body
         const savedProduct = await products.create(newProduct)
@@ -28,3 +28,26 @@ ProductCtrl.PostUsers = async (req, res, next) => {
         });
     }
 }
+
+ProductCtrl.GetProduct = async (req, res, next) => {   
+    try {
+        const Products = await products.find()
+        res.status(200).send(
+            {
+                status: 200,
+                message: "Se ha obtenido los productos con exitos",
+                data: Products
+            }
+        )
+    } catch (error) {
+        res.status(500).send(
+            {
+                status: 500,
+                message: "Error al obtener datos de los productos",
+                error: error.message
+            }
+        )
+    }
+}
+
+module.exports = ProductCtrl

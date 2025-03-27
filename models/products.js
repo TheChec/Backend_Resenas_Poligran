@@ -3,7 +3,7 @@ const mongoose = require("mongoose")
 const StorageSchema = new mongoose.Schema(
     {
         _id: {
-            type: mongoose.Schema.Types.ObjectId,
+            type: String,
             unique: true,
             trim: true
         },
@@ -36,7 +36,7 @@ const StorageSchema = new mongoose.Schema(
         reviews: [
             {
                 user: {
-                    type: mongoose.Schema.Types.ObjectId,
+                    type: String,
                     ref: "users",
                     required: true
                 },

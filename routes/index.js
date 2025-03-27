@@ -10,7 +10,6 @@ const removeExtension = (fileName) => {
 
 fs.readdirSync(pathRouter).filter((file) => {
     const name = removeExtension(file)
-
     if(name!=="index"){
         router.use(`/api/${name}`, require(`./${name}`))
         console.log('Ruta cargada -----> ', name, ' <-------')
