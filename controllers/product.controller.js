@@ -95,4 +95,37 @@ ProductCtrl.UpdateProduct = async (req, res, next) => {
     }
 }
 
+ProductCtrl.ReviewsProduct = async (req, res, next) => {
+    try {
+        const Reviews = req.body 
+        const _id = req.params.id
+        console.log(_id)
+        console.log(Reviews)
+        const existProducto = await products.findById(_id)
+        if(!existProducto) {
+            throw(new Error,  "El producto no ha sido encontrado")
+        }
+        
+        existProducto.reviews.push(Reviews)
+        const UpdateProduct = await existProducto.save()
+        res.status(200).send(
+            {
+                status: 200,
+                message: "Se ha hecho una reseña",
+                data: UpdateProduct
+            }
+        )
+
+    }catch (error) { 
+        res.status(500).send(
+            {
+                status: 500, 
+                message: "Error al actualizar la review",
+                error: error.message
+            }
+        )
+        
+    }
+}
+ 
 module.exports = ProductCtrl

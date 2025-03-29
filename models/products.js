@@ -28,9 +28,16 @@ const StorageSchema = new mongoose.Schema(
         },
         reviews: [
             {
-                user: {
+                id_user: {
                     type: String,
                     ref: "users",
+                },
+                name_user: {
+                    type: String,
+                
+                },
+                img_user: {
+                    type: String
                 },
                 comment: {
                     type: String,

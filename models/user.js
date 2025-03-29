@@ -10,6 +10,10 @@ const StorageSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        img: {
+            type: String,
+            required: true,
+        },
         age: {
             type: String,
             required: true,

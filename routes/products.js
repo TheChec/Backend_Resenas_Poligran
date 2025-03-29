@@ -6,6 +6,5 @@ router.post("/",ProductCtrl.PostProduct)
 router.get("/",ProductCtrl.GetProduct)
 router.delete("/:id",ProductCtrl.DelProduct)
 router.put("/:id",ProductCtrl.UpdateProduct)
-
+router.get("/review/:id",ProductCtrl.ReviewsProduct)
 module.exports = router
-
