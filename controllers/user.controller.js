@@ -51,6 +51,11 @@ UserCtrl.PostUser = async (req, res, next) => {
     try {
         const newUser = req.body;
         newUser.password = await hashPassword(newUser.password)
+
+        if (!newUser.img) {
+            throw(new Error,  "Error al enviar la imagen")
+        }
+
         const user = await User.create(newUser);
         res.status(201).send({
             status: 201,

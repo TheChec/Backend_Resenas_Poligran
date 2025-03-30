@@ -27,7 +27,8 @@ LoginCtrl.Login = async (req, res, next) => {
                 data: {
                     _id: LoginUser._id,
                     role: LoginUser.role,
-                    name: LoginUser.name
+                    name: LoginUser.name,
+                    lastName: LoginUser.lastname,
                 }
             }
         )
