@@ -6,23 +6,26 @@ const app = express()
 const conection_mongoDB = require("../database/config")
 const { boomErrorHandler, errorHandler, logErrors } = require('../utils/BoomErrors')
 const PORT = process.env.PORT || 3000
-const path = require('path');
 
 app.use(express.json())
 
-const whitelist = process.env.URL_PRODUCTION || ['http://localhost:8080', 'http://localhost:4200', 'https://frontend-resenas-poligran.vercel.app']
-
+const whitelist = [
+    'http://localhost:4200',
+    'https://frontend-resenas-poligran.vercel.app'
+  ];
+  
 const corsOptions = {
-    origin: (origin, callback) => {
+    origin: function (origin, callback) {
       if (!origin || whitelist.includes(origin)) {
         callback(null, true);
       } else {
         callback(new Error('Not allowed by CORS'));
       }
     },
-    credentials: true,
+    credentials: true, // si necesitas enviar cookies o headers personalizados
   };
-app.use(cors(options_cors))
+  
+app.use(cors(corsOptions))
 app.use(router)
 app.use(logErrors)
 app.use(boomErrorHandler)
