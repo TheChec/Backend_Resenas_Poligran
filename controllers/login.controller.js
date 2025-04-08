@@ -29,6 +29,7 @@ LoginCtrl.Login = async (req, res, next) => {
                     role: LoginUser.role,
                     name: LoginUser.name,
                     lastName: LoginUser.lastname,
+                    img: LoginUser.img,
                 }
             }
         )

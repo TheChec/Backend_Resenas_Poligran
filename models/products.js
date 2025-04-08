@@ -12,22 +12,26 @@ const StorageSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        category:{
+            type: String,
+            required: true
+        },
         img:{
             type: String,
             required: true,
         },
-        count: {
-            type: Number,
-            required: true,
-        },
         rating: {
             type: Number,
+            default: 0
+
         },
         people_who_rate: {
             type: Number,
+            default: 0
+            
         },
-        reviews: [
-            {
+        reviews: {
+            type: [{
                 id_user: {
                     type: String,
                     ref: "users",
@@ -46,8 +50,9 @@ const StorageSchema = new mongoose.Schema(
                     type: Date,
                     default: Date.now
                 }
-            }
-        ]
+            }],
+            default: []
+        }
     },
     {
         timestamps: true,

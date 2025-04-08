@@ -12,13 +12,14 @@ const storage = multer.diskStorage({
       cb(error, null);
     }
   },
-  filename: async (req, file, cb) => {
-    try {
-      const uniqueName = `${Date.now()}${path.extname(file.originalname)}`;
-      cb(null, uniqueName);
-    } catch (error) {
-      cb(error, null);
-    }
+  filename: (req, file, cb) => {
+    const newFileName = `${Date.now()}${path.extname(file.originalname)}`;
+    
+    // Sobrescribe el campo 'img' del formData con el nuevo nombre
+    if (!req.body) req.body = {};
+    req.body.img = newFileName;
+
+    cb(null, newFileName);
   }
 });
 

@@ -11,7 +11,7 @@ const ProductCtrl = {}
 
 ProductCtrl.PostProduct = async (req, res, next) => {
     try {
-        const newProduct = req.body
+        const newProduct = req.body 
         const savedProduct = await products.create(newProduct)
         res.status(200).send(
             {
@@ -97,22 +97,68 @@ ProductCtrl.UpdateProduct = async (req, res, next) => {
 
 ProductCtrl.ReviewsProduct = async (req, res, next) => {
     try {
-        const Reviews = req.body 
-        const _id = req.params.id
-        console.log(_id)
-        console.log(Reviews)
-        const existProducto = await products.findById(_id)
-        if(!existProducto) {
-            throw(new Error,  "El producto no ha sido encontrado")
+        const review = req.body;
+        const _id = req.params.id;
+
+        const existProducto = await products.findById(_id);
+        if (!existProducto) {
+            return res.status(404).send({
+                status: 404,
+                message: "El producto no ha sido encontrado"
+            });
         }
-        
-        existProducto.reviews.push(Reviews)
-        const UpdateProduct = await existProducto.save()
+
+        const yaComento = existProducto.reviews.some(
+            (r) => r.id_user === review.id_user
+        );
+
+        if (!yaComento) {
+            existProducto.people_who_rate += 1;
+        }
+
+        existProducto.reviews.push({
+            id_user: review.id_user,
+            name_user: review.name_user,
+            img_user: review.img_user,
+            comment: review.comment,
+            createdAt: new Date()
+        });
+
+        // Calcular nuevo promedio
+        const totalEstrellas = existProducto.rating * (existProducto.people_who_rate - (yaComento ? 0 : 1)) + review.stars;
+        const nuevoPromedio = totalEstrellas / existProducto.people_who_rate;
+
+        // Actualizar rating
+        existProducto.rating = parseFloat(nuevoPromedio.toFixed(1));
+
+        const UpdateProduct = await existProducto.save();
+
+        res.status(200).send({
+            status: 200,
+            message: "Se ha hecho una reseña",
+            data: UpdateProduct
+        });
+
+    } catch (error) {
+        res.status(500).send({
+            status: 500,
+            message: "Error al actualizar la review",
+            error: error.message
+        });
+    }
+};
+
+
+
+ProductCtrl.GetProductsByCategory = async (req, res, next) => {
+    try {
+        const id = req.params.idcat
+        const productFilters = await products.find({ category: id });
         res.status(200).send(
             {
                 status: 200,
-                message: "Se ha hecho una reseña",
-                data: UpdateProduct
+                message: "Se han traido todos los productos por categoria",
+                data: productFilters
             }
         )
 
@@ -120,12 +166,11 @@ ProductCtrl.ReviewsProduct = async (req, res, next) => {
         res.status(500).send(
             {
                 status: 500, 
-                message: "Error al actualizar la review",
+                message: "Error al traer los productos por categoria",
                 error: error.message
             }
         )
         
     }
 }
- 
 module.exports = ProductCtrl

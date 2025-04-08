@@ -6,6 +6,7 @@ const app = express()
 const conection_mongoDB = require("../database/config")
 const { boomErrorHandler, errorHandler, logErrors } = require('../utils/BoomErrors')
 const PORT = process.env.PORT || 3000
+const path = require('path');
 
 app.use(express.json())
 
@@ -20,7 +21,6 @@ const options_cors = {
         }
     }
 }
-
 app.use(cors(options_cors))
 app.use(router)
 app.use(logErrors)

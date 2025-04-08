@@ -1,10 +1,13 @@
 const express = require("express")
 const router = express.Router()
-const ProductCtrl = require("../controllers/product.controller");  // Correcta si el controlador está en la carpeta 'controllers'
+const ProductCtrl = require("../controllers/product.controller");   
+const upload = require('../middlewares/multer')
 
-router.post("/",ProductCtrl.PostProduct)
+router.post("/",upload.single('file'), ProductCtrl.PostProduct)
 router.get("/",ProductCtrl.GetProduct)
+router.put("/review/:id",ProductCtrl.ReviewsProduct)
+router.get("/categoria/:idcat",ProductCtrl.GetProductsByCategory)
 router.delete("/:id",ProductCtrl.DelProduct)
 router.put("/:id",ProductCtrl.UpdateProduct)
-router.get("/review/:id",ProductCtrl.ReviewsProduct)
+
 module.exports = router
