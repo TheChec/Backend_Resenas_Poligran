@@ -10,7 +10,7 @@ const path = require('path');
 
 app.use(express.json())
 
-const whitelist = process.env.URL_PRODUCTION || ['http://localhost:8080', 'http://localhost:4200', 'https://frontend-resenas-poligran.vercel.app/']
+const whitelist = process.env.URL_PRODUCTION || ['http://localhost:8080', 'http://localhost:4200', 'https://frontend-resenas-poligran.vercel.app']
 
 const options_cors = {
     origin: (origin, callback) => {
