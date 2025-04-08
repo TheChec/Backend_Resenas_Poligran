@@ -12,15 +12,16 @@ app.use(express.json())
 
 const whitelist = process.env.URL_PRODUCTION || ['http://localhost:8080', 'http://localhost:4200', 'https://frontend-resenas-poligran.vercel.app']
 
-const options_cors = {
+const corsOptions = {
     origin: (origin, callback) => {
-        if(whitelist.includes(origin) || !origin){
-            callback(null, true)
-        }else{
-            callback(null, false)
-        }
-    }
-}
+      if (!origin || whitelist.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true,
+  };
 app.use(cors(options_cors))
 app.use(router)
 app.use(logErrors)
