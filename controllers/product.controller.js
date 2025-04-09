@@ -3,6 +3,38 @@ const boom = require("@hapi/boom")
 const ProductCtrl = {}
 
 /**
+ * Controlador de Productos (ProductCtrl)
+ * 
+ * - Importa el modelo de productos y Boom para manejo de errores.
+ * - Define operaciones CRUD y funcionalidades adicionales para productos.
+ * 
+ * Métodos:
+ * 
+ * PostProduct:
+ *   • Crea un nuevo producto con los datos del body.
+ * 
+ * GetProduct:
+ *   • Obtiene todos los productos de la base de datos.
+ * 
+ * DelProduct:
+ *   • Elimina un producto por su ID recibido por parámetro.
+ * 
+ * UpdateProduct:
+ *   • Actualiza un producto por ID con los datos recibidos.
+ * 
+ * ReviewsProduct:
+ *   • Añade una reseña al producto por ID.
+ *   • Verifica si el usuario ya comentó.
+ *   • Actualiza el promedio de estrellas y la cantidad de personas que calificaron.
+ * 
+ * GetProductsByCategory:
+ *   • Devuelve productos filtrados por categoría (ID recibido por parámetro).
+ * 
+ * - Exporta `ProductCtrl` para usarlo en las rutas.
+ */
+
+
+/**
  * Middleware de ejemplo
  * @param {import("express").Request} req
  * @param {import("express").Response} res

@@ -4,6 +4,39 @@ const {hashPassword} = require('../utils/bcrypt')
 const UserCtrl = {}
 
 /**
+ * Controlador de Usuarios (UserCtrl)
+ * 
+ * - Maneja las operaciones CRUD para la entidad Usuario.
+ * - Utiliza Boom para el manejo de errores HTTP.
+ * - Usa bcrypt para el hash de contraseñas.
+ * 
+ * Métodos:
+ * 
+ * GetUsers:
+ *   • Obtiene todos los usuarios de la base de datos.
+ * 
+ * GetUserById:
+ *   • Obtiene un usuario por su ID.
+ *   • Retorna error 404 si no se encuentra.
+ * 
+ * PostUser:
+ *   • Crea un nuevo usuario.
+ *   • Encripta la contraseña antes de guardarla.
+ *   • Lanza error si no se proporciona una imagen.
+ * 
+ * UpdateUser:
+ *   • Actualiza los datos de un usuario por su ID.
+ *   • Retorna error 404 si el usuario no existe.
+ * 
+ * DeleteUser:
+ *   • Elimina un usuario por su ID.
+ *   • Retorna error 404 si el usuario no existe.
+ * 
+ * Exporta `UserCtrl` para ser utilizado en las rutas del sistema.
+ */
+
+
+/**
  * Middleware de ejemplo
  * @param {import("express").Request} req
  * @param {import("express").Response} res

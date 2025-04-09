@@ -1,5 +1,31 @@
 const mongoose = require("mongoose")
 
+/**
+ * Modelo Products (MongoDB con Mongoose)
+ * 
+ * - Define la estructura de un producto:
+ *    • name: nombre único en mayúsculas (String, requerido, único)
+ *    • description: descripción del producto (String, requerido)
+ *    • category: categoría del producto (String, requerido)
+ *    • img: imagen del producto (String, requerido)
+ *    • rating: puntuación promedio (Number, por defecto 0)
+ *    • people_who_rate: total de personas que han calificado (Number, por defecto 0)
+ *    • reviews: array de reseñas con:
+ *         - id_user: ID del usuario que comenta (String, referencia)
+ *         - name_user: nombre del usuario (String)
+ *         - img_user: imagen del usuario (String)
+ *         - comment: texto del comentario (String)
+ *         - createdAt: fecha del comentario (Date, por defecto actual)
+ * 
+ * - Configuración del esquema:
+ *    • timestamps activados (createdAt y updatedAt automáticos)
+ *    • versionKey desactivado
+ *    • _id incluido por defecto
+ * 
+ * - Exporta el modelo 'products' si no existe ya en mongoose.models
+ */
+
+
 const StorageSchema = new mongoose.Schema(
     {
         name: {

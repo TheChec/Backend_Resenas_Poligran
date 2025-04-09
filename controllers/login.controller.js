@@ -3,6 +3,24 @@ const { verifyPassword } = require('../utils/bcrypt')
 const boom = require('@hapi/boom')
 const LoginCtrl = {}
 
+/**
+ * Controlador de Login de Usuario
+ * 
+ * - Importa el modelo de usuario y la función para verificar contraseñas.
+ * - Define un objeto `LoginCtrl` con el método `Login`.
+ * 
+ * LoginCtrl.Login:
+ *   • Extrae `email` y `password` del cuerpo de la solicitud.
+ *   • Busca el usuario por email en la base de datos.
+ *   • Si no existe, lanza error.
+ *   • Compara la contraseña ingresada con la almacenada (bcrypt).
+ *   • Si no coinciden, lanza error.
+ *   • Si todo es correcto, responde con status 200 y datos del usuario (sin la contraseña).
+ *   • En caso de error, responde con status 500 y el mensaje del error.
+ * 
+ * - Exporta `LoginCtrl` para usarlo en las rutas.
+ */
+
 
 LoginCtrl.Login = async (req, res, next) => {
     try {
