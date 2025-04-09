@@ -27,6 +27,3 @@ Este proyecto es un **API REST** desarrollada en **Node.js** usando **Express** 
 - **Postman** o similar para pruebas de endpoints
 
 ---
-
-## 📁 Estructura del Proyecto
-
